@@ -2,11 +2,12 @@ pipeline {
   agent any
   stages {
     stage('SCM Checkout') {
-      script{
-        def repo='jenkins-example-selenium-tests'
-      }
+      
       steps {
         sh 'echo in scm checkout'
+        script{
+        def repo='jenkins-example-selenium-tests'
+      }
         checkout scm: [$class: 'GitSCM', 
         branches: [[name: '*/main']], 
         userRemoteConfigs: [
