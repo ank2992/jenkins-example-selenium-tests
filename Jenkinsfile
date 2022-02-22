@@ -3,12 +3,14 @@ pipeline {
   stages {
     stage('Verify browsers are installed') {
       steps {
+        sh 'echo checking driver connections'
         sh 'google-chrome --version'
         sh 'firefox --version'
       }
     }
     stage('Run Tests') {
       steps {
+        sh 'echo running MVN tests'
         sh './mvnw clean test'
       }
     }
