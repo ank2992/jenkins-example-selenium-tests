@@ -1,3 +1,4 @@
+def repo="jenkins-example-selenium-tests"
 pipeline {
   agent any
   stages {
@@ -5,10 +6,7 @@ pipeline {
     stage('SCM Checkout') {
 
       steps {
-        script{
-          repo="jenkins-example-selenium-tests"
-          sh "echo in scm checkout from ${repo}"
-        }
+        
         sh 'echo in scm checkout from ${repo}'
         sh "echo in scm checkout from ${repo}"
         checkout scm: [$class: 'GitSCM',
