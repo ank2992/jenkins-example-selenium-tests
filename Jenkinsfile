@@ -12,7 +12,7 @@ pipeline {
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
         userRemoteConfigs: [
-          [url: 'git@github.com:ank2992/${repo}',
+          [url: "git@github.com:ank2992/${repo}",
           ,credentialsId:'connect-rambo-git']
           ]]
 
