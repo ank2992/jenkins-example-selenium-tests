@@ -2,15 +2,17 @@ pipeline {
   agent any
   stages {
     stage('SCM Checkout') {
+      script{
+        def repo='jenkins-example-selenium-tests'
+      }
       steps {
         sh 'echo in scm checkout'
         checkout scm: [$class: 'GitSCM', 
         branches: [[name: '*/main']], 
         userRemoteConfigs: [
-          [url: 'git@github.com:ank2992/jenkins-example-selenium-tests',
+          [url: 'git@github.com:ank2992/${repo}',
           ,credentialsId:'connect-rambo-git']
           ]]
-        
       }
     }
     stage('Verify browsers are installed') {
