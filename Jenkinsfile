@@ -4,7 +4,8 @@ pipeline {
     stage('Verify browsers are installed') {
       steps {
         sh 'echo checking driver connections'
-        sh 'google-chrome --version'
+        sh '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version                                                                            
+Google Chrome 59.0.3071.104 '
         sh 'firefox --version'
       }
     }
