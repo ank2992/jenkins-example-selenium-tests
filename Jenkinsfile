@@ -9,7 +9,7 @@ pipeline {
         userRemoteConfigs: [
           [url: 'git@github.com:ank2992/jenkins-example-selenium-tests',
           ,credentialsId:'connect-rambo-git']
-          ]]]
+          ]]
         
       }
     }
