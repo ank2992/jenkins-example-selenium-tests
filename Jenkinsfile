@@ -7,9 +7,10 @@ pipeline {
       steps {
         script{
           repo="jenkins-example-selenium-tests"
+          sh "echo in scm checkout from ${repo}"
         }
         sh 'echo in scm checkout from ${repo}'
-        sh 'echo in scm checkout from "${repo}"'
+        sh "echo in scm checkout from ${repo}"
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
         userRemoteConfigs: [
