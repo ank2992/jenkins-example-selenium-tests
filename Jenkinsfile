@@ -2,8 +2,8 @@ def repo="jenkins-example-selenium-tests"
 pipeline {
   agent any
   tools{
-    maven:'maven 3.8.1'
-    jdk:'openJDK11'
+    maven 'maven 3.8.1'
+    jdk 'openJDK11'
   }
   stages {
 
