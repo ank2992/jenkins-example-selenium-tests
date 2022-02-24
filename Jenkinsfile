@@ -6,6 +6,14 @@ pipeline {
     jdk 'openJDK11'
   }
   stages {
+    stage('`initialize') {
+      steps {
+       sh''' 
+       echo "PATH=${PATH}"
+       echo "M2_HOME=${M2_HOME}"
+       '''
+      }
+    }
 
     stage('SCM Checkout') {
 
@@ -13,6 +21,7 @@ pipeline {
         
         sh "echo in scm checkout from ${repo}"
         sh "echo in scm checkout from ${repo}"
+        
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
         userRemoteConfigs: [
@@ -24,10 +33,7 @@ pipeline {
     }
     stage('build') {
       steps {
-       sh''' 
-       echo "PATH=${PATH}"
-       echo "M2_HOME=${M2_HOME}"
-       '''
+       sh"mvn clean install"
       }
     }
 
