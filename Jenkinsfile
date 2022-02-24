@@ -1,13 +1,17 @@
 def repo="jenkins-example-selenium-tests"
 pipeline {
   agent any
+  tools{
+    maven:'maven 3.8.1'
+    jdk:'openJDK11'
+  }
   stages {
 
     stage('SCM Checkout') {
 
       steps {
         
-        sh 'echo in scm checkout from ${repo}'
+        sh "echo in scm checkout from ${repo}"
         sh "echo in scm checkout from ${repo}"
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
@@ -16,6 +20,14 @@ pipeline {
           ,credentialsId:'connect-rambo-git']
           ]]
 
+      }
+    }
+    stage('build') {
+      steps {
+       sh''' 
+       echo "PATH=${PATH}"
+       echo "M2_HOME"=${}M2_HOME"
+       '''
       }
     }
 
