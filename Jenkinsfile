@@ -6,7 +6,8 @@ pipeline {
     jdk 'openJDK11'
   }
   stages {
-    stage('`initialize') {
+    stage('Initialize') {
+      
       steps {
        sh''' 
        echo "PATH=${PATH}"
@@ -21,7 +22,7 @@ pipeline {
         
         sh "echo in scm checkout from ${repo}"
         sh "echo in scm checkout from ${repo}"
-        
+
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
         userRemoteConfigs: [
