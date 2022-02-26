@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.planetpope.seleniumtests</groupId>
-  <artifactId>jenkins-example-selenium-tests</artifactId>
+  <artifactId>jenkins-selenium-tests</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>jenkins-example-selenium-tests</name>
@@ -109,7 +109,32 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+         <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>execution1</id>
+            <phase>test</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+        <configuration>
+          <outputDirectory>${project.artifactId}</outputDirectory>
+          <finalName>${project.build.directory}</finalName>
+          <attach>false</attach>
+        </configuration>
+        </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
       </plugins>
     </pluginManagement>
+
   </build>
 </project>
