@@ -7,8 +7,9 @@ pipeline {
   }
   stages {
     stage('Initialize') {
-      
+
       steps {
+       sh "echo **************IN INITIALIZE**************"
        sh''' 
        echo "PATH=${PATH}"
        echo "M2_HOME=${M2_HOME}"
@@ -19,9 +20,8 @@ pipeline {
     stage('SCM Checkout') {
 
       steps {
-        
-        sh "echo in scm checkout from ${repo}"
-        sh "echo in scm checkout from ${repo}"
+     
+        sh "echo **************IN CHECKOUT FROM ${repo}**************"
 
         checkout scm: [$class: 'GitSCM',
         branches: [[name: '*/main']],
@@ -34,17 +34,14 @@ pipeline {
     }
     stage('build') {
       steps {
-       sh"mvn clean install"
+       sh "echo **************IN BUILD**************"
+       sh"mvn clean package"
       }
     }
 
-    stage('Verify browsers are installed') {
-      steps {
-        sh 'echo checking driver connections' 
-      }
-    }
     stage('Run Tests') {
       steps {
+        sh "echo **************IN TESTS**************"
         sh 'echo running MVN tests'
         sh './mvnw clean test'
       }
