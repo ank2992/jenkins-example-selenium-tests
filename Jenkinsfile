@@ -6,8 +6,8 @@ pipeline {
     jdk 'openJDK11'
   }
   environment{
-  JAVA_HOME= tool name:'openJDK11'
-  MAVEN_HOME= tool name:'maven 3.8.1'
+  JAVA_HOME= tool name:maven
+  MAVEN_HOME= tool name:jdk
   
   }
   stages {
@@ -42,7 +42,7 @@ pipeline {
     stage('build') {
       steps {
        sh "echo **************IN BUILD**************"
-       sh"'${MAVEN_HOME}/bin/mvn' clean"
+       sh"'${MAVEN_HOME}/bin/mvn' clean package"
    
       }
     }
