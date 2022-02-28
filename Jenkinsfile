@@ -6,8 +6,8 @@ pipeline {
     jdk 'openJDK11'
   }
   environment{
-  JAVA_HOME= tool name:maven
-  MAVEN_HOME= tool name:jdk
+  JAVA_HOME= tool name:'openJDK11'
+  MAVEN_HOME= tool name:'maven 3.8.1'
   
   }
   stages {
