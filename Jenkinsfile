@@ -5,6 +5,11 @@ pipeline {
     maven 'maven 3.8.1'
     jdk 'openJDK11'
   }
+  environment{
+  JAVA_HOME= tool name:"${jdk}"
+  MAVEN_HOME= tool name:"${maven}"
+  
+  }
   stages {
     stage('Initialize') {
 
@@ -13,6 +18,8 @@ pipeline {
        sh''' 
        echo "PATH=${PATH}"
        echo "M2_HOME=${M2_HOME}"
+       echo "JAVA_HOME=${JAVA_HOME}"
+       echo "MAVEN_HOME=${MAVEN_HOME}"
        '''
       }
     }
@@ -35,7 +42,8 @@ pipeline {
     stage('build') {
       steps {
        sh "echo **************IN BUILD**************"
-       sh"mvn clean package"
+       sh"'${MAVEN_HOME}/bin/mvn'clean"
+   
       }
     }
 
