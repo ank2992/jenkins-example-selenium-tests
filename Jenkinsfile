@@ -42,7 +42,7 @@ pipeline {
     stage('build') {
       steps {
        sh "echo **************IN BUILD**************"
-       sh"'${MAVEN_HOME}/bin/mvn' -Dmaven.test.failure.ignore=true clean package"
+       sh"'${MAVEN_HOME}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    
       }
     }
