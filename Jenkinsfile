@@ -50,7 +50,7 @@ pipeline {
       steps {
       
        sh "echo **************Connect With AWS**************"
-       sh "aws --version"
+       
        
      withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
                     sh 'echo "hello Jenkins">hello.txt'
