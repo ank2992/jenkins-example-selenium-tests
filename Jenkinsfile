@@ -83,14 +83,21 @@ pipeline {
                 }
    
       }
+    }stage('Delete Cloud Formation') {
+      steps {
+        sh "echo **************DELETE CF**************"
+        withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
+        cfnDelete(stack:'my-test-stack')
+        }
+      }
     }
 
-    stage('Run Tests') {
+   /* stage('Run Tests') {
       steps {
         sh "echo **************IN TESTS**************"
         sh 'echo running MVN tests'
         sh './mvnw clean test'
       }
-    }
+    }*/
   }
 }
