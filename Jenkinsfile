@@ -55,9 +55,7 @@ pipeline {
      withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
                     sh 'echo "hello Jenkins">hello.txt'
                     s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
-                    s3Download bucket: 'test-upload-777', file: 'hello.txt', 
-                    path: 'hello.txt'
-                    sh 'cat downloadedHello.txt'
+                    
                 }
    
       }
