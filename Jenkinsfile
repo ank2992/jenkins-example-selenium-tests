@@ -83,7 +83,8 @@ pipeline {
                 }
    
       }
-    }stage('Delete Cloud Formation') {
+    }
+    stage('Delete Cloud Formation') {
       steps {
         sh "echo **************DELETE CF**************"
         withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
