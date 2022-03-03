@@ -71,11 +71,11 @@ pipeline {
                     
                     s3Upload(file:'cloudFormation.yaml',
                      bucket:'test-upload-777', 
-                     path:'path/to/target/')
+                     path:'cftemplates/')
                     
                     
                    // sh "echo deleting test-upload-777 bucket.... "
-                    //s3Delete(bucket:'test-upload-777', path:'path/to/sourceFolder/')
+                    s3Delete(bucket:'test-upload-777', path:'path/to/target/')
                     
                 }
    
