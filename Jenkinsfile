@@ -73,9 +73,12 @@ pipeline {
                      bucket:'test-upload-777', 
                      path:'cftemplates/')
                     
+                    def outputs = cfnUpdate(stack:'my-test-stack',
+                     url:'https://test-upload-777.s3.amazonaws.com/cftemplates/cloudFormation.yaml')
                     
                    // sh "echo deleting test-upload-777 bucket.... "
-                    s3Delete(bucket:'test-upload-777', path:'path/to/target/')
+                   // s3Delete(bucket:'test-upload-777', path:'path/to/target/')
+                    
                     
                 }
    
