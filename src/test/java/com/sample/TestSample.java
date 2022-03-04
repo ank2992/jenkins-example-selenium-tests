@@ -36,7 +36,7 @@ public class TestSample {
     @Test  
     public void testFindMaxFail(){  
         System.out.println("test case find max fail");  
-        assertEquals(4,findMax(new int[]{1,3,4,6}));  
+        assertEquals(6,findMax(new int[]{1,3,4,6}));  
       
     }    
 }  
