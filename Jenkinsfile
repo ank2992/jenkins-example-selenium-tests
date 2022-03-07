@@ -1,6 +1,9 @@
 def repo="jenkins-example-selenium-tests"
 pipeline {
-  agent any
+  agent {
+      docker{image 'node:16-alpine'}
+  }
+
   tools{
     maven 'maven 3.8.1'
     jdk 'openJDK11'
