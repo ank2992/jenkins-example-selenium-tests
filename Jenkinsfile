@@ -1,8 +1,6 @@
 def repo="jenkins-example-selenium-tests"
 pipeline {
-  agent {
-      docker{image 'maven:3.8.1-adoptopenjdk-11'}
-  }
+  agent any
 
   tools{
     maven 'maven 3.8.1'
@@ -53,7 +51,10 @@ pipeline {
      stage('build docker Image') {
       steps {
        sh "echo **************BUILD DOCKER IMAGE**************"
-       sh"docker build -t rambo29/sample-jenkins-demo:latest ."
+       docker.withRegistry('https://hub.docker.com', 'docker-hub-connect') {
+       docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
+       }
+      
    
       }
     }
