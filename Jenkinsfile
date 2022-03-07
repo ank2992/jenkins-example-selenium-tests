@@ -51,11 +51,11 @@ pipeline {
      stage('build docker Image') {
       steps {
        sh "echo **************BUILD DOCKER IMAGE**************"
+       script{
        docker.withRegistry('https://hub.docker.com', 'docker-hub-connect') {
        docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
        }
-      
-   
+       }
       }
     }
     stage('Login in Registry') {
