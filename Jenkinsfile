@@ -52,27 +52,13 @@ pipeline {
       steps {
        sh "echo **************BUILD DOCKER IMAGE**************"
        script{
-       docker.withRegistry('https://hub.docker.com', 'docker-hub-connect') {
+       docker.withRegistry('https://hub.docker.com/repository/docker/rambo29/sample-jenkins-demo', 'docker-hub-connect') {
        docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
        }
        }
       }
     }
-    stage('Login in Registry') {
-      steps {
-       sh "echo **************LOGIN IN REGISTRY**************"
-       sh"echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
-       
    
-      }
-    }
-    stage('Push the image') {
-      steps {
-       sh "echo **************PUSH THE IMAGE**************"
-       sh"docker push rambo29/sample-jenkins-demo:latest"
-   
-      }
-    }
     stage('Connect with AWS') {
       steps {
       
