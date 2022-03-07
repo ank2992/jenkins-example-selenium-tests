@@ -1,4 +1,7 @@
 FROM openjdk:11
-EXPOSE 8282
-COPY target/jenkins-selenium-tests-1.0-SNAPSHOT.jar jenkins-selenium-tests-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","jenkins-selenium-tests-1.0-SNAPSHOT.jar"]
+RUN echo pwd
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+ENTRYPOINT ["sh","runservice.sh"]
+

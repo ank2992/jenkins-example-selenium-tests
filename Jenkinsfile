@@ -8,6 +8,7 @@ pipeline {
   environment{
   JAVA_HOME= tool name:'openJDK11'
   MAVEN_HOME= tool name:'maven 3.8.1'
+  DOCKERHUB_CREDENTIALS=credentials('docker-hub-connect')
   
   }
   stages {
@@ -43,6 +44,28 @@ pipeline {
       steps {
        sh "echo **************IN BUILD**************"
        sh"'${MAVEN_HOME}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+   
+      }
+    }
+     stage('build docker Image') {
+      steps {
+       sh "echo **************BUILD DOCKER IMAGE**************"
+       sh"docker build -t rambo29/sample-jenkins-demo:latest ."
+   
+      }
+    }
+    stage('Login in Registry') {
+      steps {
+       sh "echo **************LOGIN IN REGISTRY**************"
+       sh"echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+       
+   
+      }
+    }
+    stage('Push the image') {
+      steps {
+       sh "echo **************PUSH THE IMAGE**************"
+       sh"docker push rambo29/sample-jenkins-demo:latest"
    
       }
     }
