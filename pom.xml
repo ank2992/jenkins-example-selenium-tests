@@ -82,21 +82,21 @@
 			<artifactId>spring-web</artifactId>
 
 		</dependency>
-<dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-chrome-driver</artifactId>
-        <version>4.0.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-api</artifactId>
-        <version>4.0.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-remote-driver</artifactId>
-        <version>4.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>4.0.0</version>
+		</dependency>
 
 	</dependencies>
 
@@ -164,6 +164,28 @@
 					</executions>
 				</plugin>
 
+				<!-- <plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>dockerfile-maven-plugin</artifactId>
+					<version>1.4.13</version>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>package</phase>
+							<goals>
+								<goal>build</goal>
+								<goal>push</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<repository>rambo29/sample-jenkins-demo</repository>
+						<tag>latest</tag>
+						<buildArgs>
+							<JAR_FILE>target/jenkins-selenium-tests-1.0-SNAPSHOT.jar</JAR_FILE>
+						</buildArgs>
+					</configuration>
+				</plugin> -->
 			</plugins>
 		</pluginManagement>
 

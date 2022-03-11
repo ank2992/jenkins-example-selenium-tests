@@ -1,7 +1,8 @@
 FROM openjdk:11
 RUN echo pwd
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-ENTRYPOINT ["sh","runservice.sh"]
+ENV APP_HOME /usr/src/app
+RUN mkdir -p ${APP_HOME}
+WORKDIR ${APP_HOME}
+COPY . ${APP_HOME}
+ENTRYPOINT ["/bin/bash","./runservice.sh"]
 
