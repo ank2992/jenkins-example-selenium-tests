@@ -46,6 +46,7 @@ pipeline {
        sh "echo **************IN BUILD**************"
        sh"'${MAVEN_HOME}/bin/mvn' wrapper:wrapper"
        sh"'${MAVEN_HOME}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+       sh "docker run -i sample-jenkins-demo:latest"
    
       }
     }
