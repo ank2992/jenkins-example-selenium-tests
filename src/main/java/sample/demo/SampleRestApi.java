@@ -10,5 +10,10 @@ public class SampleRestApi {
 	public String helloWorld() {
 		return "Hello World";
 	}
+	
+	@GetMapping(path = "")
+	public String initial() {
+		return "Started....!";
+	}
 
 }
