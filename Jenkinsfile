@@ -56,7 +56,7 @@ pipeline {
        script{
        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-connect') {
        docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
-       // sh"docker-compose build"
+        //sh"docker-compose build"
         //sh ""
        }
        }
@@ -70,8 +70,15 @@ pipeline {
        
        
      withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
-                    sh 'echo "hello Jenkins">hello.txt'
-                    s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
+                   // sh 'echo "hello Jenkins">hello.txt'
+                   // s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
+                   script{
+                   sh"docker context create ecs myecscontext"
+                   sh" docker context ls"
+                   sh" docker context use myecscontext"
+                   sh" docker context ls"
+                       }
+                   }
                     
                 }
    
