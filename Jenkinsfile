@@ -55,8 +55,9 @@ pipeline {
        sh "echo **************BUILD DOCKER IMAGE**************"
        script{
        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-connect') {
-       //docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
-        sh"docker-compose build"
+       docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
+       // sh"docker-compose build"
+        //sh ""
        }
        }
       }
