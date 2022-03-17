@@ -46,7 +46,7 @@ pipeline {
        sh "echo **************IN BUILD**************"
        //sh"'${MAVEN_HOME}/bin/mvn' wrapper:wrapper"
        sh"'${MAVEN_HOME}/bin/mvn' -Dmaven.test.failure.ignore clean package"
-       sh "docker run -i rambo29/sample-jenkins-demo:latest"
+      // sh "docker run -i rambo29/sample-jenkins-demo:latest"
    
       }
     }
@@ -55,7 +55,8 @@ pipeline {
        sh "echo **************BUILD DOCKER IMAGE**************"
        script{
        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-connect') {
-       docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
+       //docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
+       sh" docker-compose build"
        }
        }
       }
@@ -75,7 +76,7 @@ pipeline {
    
       }
     }
-    stage('CloudFormation') {
+   /* stage('CloudFormation') {
       steps {
       
        sh "echo **************create cloudformation**************"
@@ -98,15 +99,15 @@ pipeline {
                 }
    
       }
-    }
-    stage('Delete Cloud Formation') {
+    }*/
+    /*stage('Delete Cloud Formation') {
       steps {
         sh "echo **************DELETE CF**************"
         withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
         cfnDelete(stack:'my-test-stack')
         }
       }
-    }
+    }*/
 
    /* stage('Run Tests') {
       steps {
