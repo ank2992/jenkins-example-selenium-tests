@@ -56,7 +56,7 @@ pipeline {
        script{
        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-connect') {
        //docker.build('rambo29/sample-jenkins-demo:latest').push('latest')
-       sh" docker-compose build"
+        sh"docker-compose build"
        }
        }
       }
