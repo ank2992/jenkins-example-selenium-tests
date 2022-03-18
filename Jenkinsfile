@@ -71,7 +71,7 @@ pipeline {
        
      withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
                     sh 'echo "hello Jenkins">hello.txt'
-                    s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
+                    s3Upload acl: 'Private', bucket: 'test-upload-77', file: 'hello.txt'
                    
                    }
                     
@@ -89,11 +89,11 @@ pipeline {
                     
                     
                     s3Upload(file:'cloudFormation2.yaml',
-                     bucket:'test-upload-777', 
+                     bucket:'test-upload-77', 
                      path:'cftemplates/')
                     
                     cfnUpdate(stack:'my-test-stack',
-                     url:'https://test-upload-777.s3.amazonaws.com/cftemplates/cloudFormation2.yaml')
+                     url:'https://test-upload-77.s3.amazonaws.com/cftemplates/cloudFormation2.yaml')
                     
                    // sh "echo deleting test-upload-777 bucket.... "
                    // s3Delete(bucket:'test-upload-777', path:'path/to/target/')
