@@ -70,8 +70,8 @@ pipeline {
        
        
      withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
-                   // sh 'echo "hello Jenkins">hello.txt'
-                   // s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
+                    sh 'echo "hello Jenkins">hello.txt'
+                    s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
                    
                    }
                     
