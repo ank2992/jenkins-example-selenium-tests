@@ -62,7 +62,7 @@ Resources:
     Type: AWS::ECS::Service
     Properties:
       ServiceName: deployment-exmaple-service
-      Cluster: !Ref Cluster
+      Cluster: !Ref ECSCluster
       TaskDefinition: !Ref TaskDefinition
       DesiredCount: 1
       LaunchType: FARGATE
