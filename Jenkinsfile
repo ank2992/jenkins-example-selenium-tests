@@ -69,36 +69,31 @@ pipeline {
        sh "echo **************Connect With AWS**************"
        
        
-     withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
+     withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
                    // sh 'echo "hello Jenkins">hello.txt'
                    // s3Upload acl: 'Private', bucket: 'test-upload-777', file: 'hello.txt'
-                   script{
-                   sh"docker context create ecs myecscontext"
-                   sh" docker context ls"
-                   sh" docker context use myecscontext"
-                   sh" docker context ls"
-                       }
+                   
                    }
                     
                 }
    
       }
     
-   /* stage('CloudFormation') {
+    stage('CloudFormation') {
       steps {
       
        sh "echo **************create cloudformation**************"
        
        
-     withAWS(credentials: 'jen-aws-key', region: 'us-east-1') {
+     withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
                     
                     
-                    s3Upload(file:'cloudFormation.yaml',
+                    s3Upload(file:'cloudFormation2.yaml',
                      bucket:'test-upload-777', 
                      path:'cftemplates/')
                     
                     cfnUpdate(stack:'my-test-stack',
-                     url:'https://test-upload-777.s3.amazonaws.com/cftemplates/cloudFormation.yaml')
+                     url:'https://test-upload-777.s3.amazonaws.com/cftemplates/cloudFormation2.yaml')
                     
                    // sh "echo deleting test-upload-777 bucket.... "
                    // s3Delete(bucket:'test-upload-777', path:'path/to/target/')
@@ -107,7 +102,7 @@ pipeline {
                 }
    
       }
-    }*/
+    }
     /*stage('Delete Cloud Formation') {
       steps {
         sh "echo **************DELETE CF**************"
