@@ -14,18 +14,6 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: deployment-example-log-group
-  ExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: deployment-example-role
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: ecs-tasks.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
   ContainerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
