@@ -93,7 +93,8 @@ pipeline {
                      path:'cftemplates/')
                     
                     cfnUpdate(stack:'my-test-stack',
-                     url:'https://test-upload-77.s3.amazonaws.com/cftemplates/cloudFormation2.yaml')
+                     url:'https://test-upload-77.s3.amazonaws.com/cftemplates/cloudFormation2.yaml',
+                      params:['SubnetID=subnet-1881f750'])
                     
                    // sh "echo deleting test-upload-777 bucket.... "
                    // s3Delete(bucket:'test-upload-777', path:'path/to/target/')
