@@ -104,14 +104,14 @@ pipeline {
    
       }
     }
-   /* stage('Delete Cloud Formation') {
+    stage('Delete Cloud Formation') {
       steps {
         sh "echo **************DELETE CF**************"
         withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
         cfnDelete(stack:'my-test-stack')
         }
       }
-    }*/
+    }
 
    /* stage('Run Tests') {
       steps {
