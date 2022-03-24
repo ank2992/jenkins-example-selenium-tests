@@ -5,4 +5,5 @@ RUN mkdir -p ${APP_HOME}
 WORKDIR ${APP_HOME}
 COPY . ${APP_HOME}
 ENTRYPOINT ["/bin/bash","./runservice.sh"]
+EXPOSE 8383
 
