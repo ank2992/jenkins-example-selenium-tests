@@ -98,8 +98,8 @@ Resources:
 
             sudo chmod 666 /var/run/docker.sock
 
-            aws s3 cp s3://test-upload-77/docker-compose/docker-compose.yml /home/ec2-user
-            docker-compose -f /home/ec2-user/docker-compose.yml up -d
+            aws s3 cp s3://test-upload-77/docker-compose/docker-compose.yaml /home/ec2-user
+            docker-compose -f /home/ec2-user/docker-compose.yaml up -d
                   
 Outputs:
   InstanceId:
