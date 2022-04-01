@@ -33,7 +33,7 @@ Resources:
   SearchServiceCucumberProfile:
     Type: AWS::IAM::InstanceProfile
     Properties: 
-      InstanceProfileName: demo-ec2-instance-profile
+      InstanceProfileName: sscucumberProfile
       Path: /
       Roles: 
        - !Ref ExecutionRoleS3Access
