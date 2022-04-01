@@ -1,24 +1,12 @@
-version: "3.2"
+version: "3.9"
 services:
- web:
-    image: "rambo29/sample-jenkins-demo"
+  hello-world:
+    image: vad1mo/hello-world-rest
     ports:
-      - "8000:8383"
-    depends_on:
-      - redis
-      - db
- redis:
-    image: "redis:alpine"
-
-    command: redis-server
-
+      - "5050:5050"
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
     ports:
-     - "8081:6379"
- db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
+      - "80:80"

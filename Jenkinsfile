@@ -71,8 +71,10 @@ pipeline {
        
      withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
                     sh 'echo "hello Jenkins">hello.txt'
-                    s3Upload acl: 'Private', bucket: 'test-upload-77', file: 'hello.txt'
-                   
+                    
+                    s3Upload acl: 'Private', 
+                    bucket: 'test-upload-77', 
+                    file: 'hello.txt'
                    }
                     
                 }
@@ -87,14 +89,17 @@ pipeline {
        
      withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
                     
-                    
-                    s3Upload(file:'cloudFormation2.yaml',
-                     bucket:'test-upload-77', 
-                     path:'cftemplates/')
+                   s3Upload(file:'cf_EC2_D_DC.yaml',
+                   bucket:'test-upload-77', 
+                   path:'cftemplates/')
+                     
+                   s3Upload(file:'docker-compose.yaml',
+                   bucket:'test-upload-77', 
+                   path:'docker-compose/')
                     
                     cfnUpdate(stack:'my-test-stack',
-                     url:'https://test-upload-77.s3.amazonaws.com/cftemplates/cloudFormation2.yaml',
-                      params:['SubnetID=subnet-219e7858'])
+                    url:'https://test-upload-77.s3.eu-west-1.amazonaws.com/cftemplates/cf_EC2_D_DC.yaml',
+                    params:['SubnetID=subnet-219e7858'])
                     
                    // sh "echo deleting test-upload-777 bucket.... "
                    // s3Delete(bucket:'test-upload-777', path:'path/to/target/')
@@ -104,14 +109,14 @@ pipeline {
    
       }
     }
-   stage('Delete Cloud Formation') {
+   /*stage('Delete Cloud Formation') {
       steps {
         sh "echo **************DELETE CF**************"
         withAWS(credentials: 'jen-aws-key', region: 'eu-west-1') {
         cfnDelete(stack:'my-test-stack')
         }
       }
-    }
+    }*/
 
    /* stage('Run Tests') {
       steps {
