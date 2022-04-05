@@ -76,7 +76,7 @@ Resources:
           - ImageId
       Tags:
         - Key: Name
-          Value: "SSInstance"
+          Value: "SSInstanceDemo"
 
       UserData:
         Fn::Base64:
