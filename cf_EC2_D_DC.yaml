@@ -62,7 +62,7 @@ Resources:
     Properties:
       SubnetId: subnet-219e7858
       SecurityGroupIds:
-        - Ref: SSGroup
+        - Ref: SSSGroup
       IamInstanceProfile: !Ref SSProfile
       InstanceType:
         Fn::FindInMap:
