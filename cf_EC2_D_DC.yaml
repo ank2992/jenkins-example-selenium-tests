@@ -12,7 +12,7 @@ Mappings:
       ImageId: ami-0069d66985b09d219
     
 Resources:
-  LogGroup:
+  SSGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: SSGroup
