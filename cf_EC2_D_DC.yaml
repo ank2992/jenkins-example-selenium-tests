@@ -38,7 +38,7 @@ Resources:
       Roles: 
        - !Ref ExecutionRoleS3Access
 
-  SearchServiceCucumberGroup:
+  SSSGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security group for SS container
