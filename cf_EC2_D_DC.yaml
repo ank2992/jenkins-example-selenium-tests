@@ -15,7 +15,7 @@ Resources:
   LogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: SearchServiceCucumberGroup
+      LogGroupName: SSGroup
   
   ExecutionRoleS3Access:
     Type: AWS::IAM::Role
@@ -30,10 +30,10 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
-  SearchServiceCucumberProfile:
+  SSProfile:
     Type: AWS::IAM::InstanceProfile
     Properties: 
-      InstanceProfileName: sscucumberProfile
+      InstanceProfileName: SSProfile
       Path: /
       Roles: 
        - !Ref ExecutionRoleS3Access
@@ -41,7 +41,7 @@ Resources:
   SearchServiceCucumberGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Security group for search service cucumber container
+      GroupDescription: Security group for SS container
       VpcId: vpc-5273c62b
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -62,12 +62,12 @@ Resources:
     Properties:
       SubnetId: subnet-219e7858
       SecurityGroupIds:
-        - Ref: SearchServiceCucumberGroup
-      IamInstanceProfile: !Ref SearchServiceCucumberProfile
+        - Ref: SSGroup
+      IamInstanceProfile: !Ref SSProfile
       InstanceType:
         Fn::FindInMap:
           - ServiceMap
-          - SearchServiceCucumber
+          - SSCucumber
           - InstanceType
       ImageId:
         Fn::FindInMap:
@@ -76,7 +76,7 @@ Resources:
           - ImageId
       Tags:
         - Key: Name
-          Value: "SearchServiceCucumberInstance"
+          Value: "SSInstance"
 
       UserData:
         Fn::Base64:
@@ -98,15 +98,14 @@ Resources:
 
             sudo chmod 666 /var/run/docker.sock
 
-            aws s3 cp s3://test-upload-77/docker-compose/docker-compose.yaml /home/ec2-user
-            docker-compose -f /home/ec2-user/docker-compose.yaml up -d
+            
                   
 Outputs:
   InstanceId:
     Description: InstanceId of the newly created EC2 instance
-    Value: !Ref SearchServiceCucumberInstance
+    Value: !Ref SSInstance
   PublicDNS:
     Description: Public DNSName of the newly created EC2 instance
-    Value: !GetAtt [SearchServiceCucumberInstance, PublicDnsName]
+    Value: !GetAtt [SSInstance, PublicDnsName]
 
           
