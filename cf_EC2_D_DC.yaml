@@ -9,10 +9,34 @@ Mappings:
       InstanceType: t2.micro
   RegionMap:
     eu-west-1:
-      ImageId: ami-0069d66985b09d219
+      ImageId: ami-0c8f57f5b12c42d4a
     
 Resources:
+  SSGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: SSGroup
   
+  ExecutionRoleS3Access:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: cucumberDockerAccess
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+  SSProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: SSProfile
+      Path: /
+      Roles: 
+       - !Ref ExecutionRoleS3Access
 
   SSSGroup:
     Type: AWS::EC2::SecurityGroup
@@ -21,10 +45,17 @@ Resources:
       VpcId: vpc-5273c62b
       SecurityGroupIngress:
         - IpProtocol: tcp
+          FromPort: 5050
+          ToPort: 5050
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
-       
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
 
   SSInstance:
     Type: AWS::EC2::Instance
@@ -32,6 +63,7 @@ Resources:
       SubnetId: subnet-219e7858
       SecurityGroupIds:
         - Ref: SSSGroup
+      IamInstanceProfile: !Ref SSProfile
       InstanceType:
         Fn::FindInMap:
           - ServiceMap
@@ -50,21 +82,8 @@ Resources:
         Fn::Base64:
          Fn::Sub: |
             #!/bin/bash
-            sudo yum update -y
-
-            sudo amazon-linux-extras install docker
-            sudo service docker start
-            sudo systemctl enable docker
-            sudo usermod -a -G docker ec2-user
-
-            wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) 
-            sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
-            sudo chmod -v +x /usr/local/bin/docker-compose
-
-            chkconfig docker on
-            docker info
-
-            sudo chmod 666 /var/run/docker.sock
+            aws s3 cp s3://test-upload-77/docker-compose/docker-compose.yaml /home/ec2-user
+            docker-compose -f /home/ec2-user/docker-compose.yaml up -d
 
             
                   
