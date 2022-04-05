@@ -5,7 +5,7 @@ Parameters:
   Type: String
 Mappings:
   ServiceMap:
-    SearchServiceCucumber:
+    SSCucumber:
       InstanceType: t2.micro
   RegionMap:
     eu-west-1:
