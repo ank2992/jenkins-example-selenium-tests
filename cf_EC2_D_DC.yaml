@@ -12,11 +12,26 @@ Mappings:
       ImageId: ami-0069d66985b09d219
     
 Resources:
+  
+
+  SSSGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for SS container
+      VpcId: vpc-5273c62b
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+       
 
   SSInstance:
     Type: AWS::EC2::Instance
     Properties:
       SubnetId: subnet-219e7858
+      SecurityGroupIds:
+        - Ref: SSSGroup
       InstanceType:
         Fn::FindInMap:
           - ServiceMap
